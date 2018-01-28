@@ -1,10 +1,9 @@
-package demo
+package scredis
 
 import akka.Done
 import akka.stream.scaladsl.{Sink, Source}
 import akka.stream.{Materializer, OverflowStrategy}
 import scredis.PubSubMessage.Message
-import scredis.SubscriberClient
 import scredis.serialization.LongReader
 
 import scala.collection.immutable
@@ -25,7 +24,7 @@ class ScredisSubscriber(subscriberClient: SubscriberClient)(implicit mat: Materi
       .collect {
         case x: Message ⇒
           val l = System.currentTimeMillis() - LongReader.read(x.message)
-          Thread.sleep(1000)
+//          Thread.sleep(1000)
           l
       }.runForeach(println)
 

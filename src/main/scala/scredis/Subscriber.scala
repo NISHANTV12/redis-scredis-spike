@@ -1,12 +1,11 @@
-package demo
+package scredis
 
 import akka.actor.ActorSystem
 import akka.stream.{ActorMaterializer, ActorMaterializerSettings}
-import scredis.SubscriberClient
 
 import scala.collection.immutable
+import scala.concurrent.Await
 import scala.concurrent.duration.DurationLong
-import scala.concurrent.{Await, Future}
 
 object Subscriber extends App {
 
@@ -19,16 +18,16 @@ object Subscriber extends App {
 
 //  new ScredisSubscriber(subscriberClient).run
 
-//  new ScredisSubscriber(subscriberClient).slowConsumer
+  new ScredisSubscriber(subscriberClient).slowConsumer
 
-  val consumer: immutable.Seq[Long] = Await.result(new ScredisSubscriber(subscriberClient).consumer, 30.seconds)
-
-  println(consumer diff consumer.sorted)
-
-  println(consumer == consumer.sorted)
-
-  println(consumer)
-  println(consumer.sorted)
+//  val consumer: immutable.Seq[Long] = Await.result(new ScredisSubscriber(subscriberClient).consumer, 30.seconds)
+//
+//  println(consumer diff consumer.sorted)
+//
+//  println(consumer == consumer.sorted)
+//
+//  println(consumer)
+//  println(consumer.sorted)
 
 }
 
